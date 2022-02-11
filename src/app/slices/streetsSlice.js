@@ -8,7 +8,7 @@ const initialState = {
   status: 'idle',
 };
 
-export const getStreets = createAsyncThunk('counter/getStreets', async () => {
+export const getStreets = createAsyncThunk('streets/getStreets', async () => {
   const data = await getData(apiPaths.STREETS);
   return data;
 });
@@ -16,7 +16,11 @@ export const getStreets = createAsyncThunk('counter/getStreets', async () => {
 export const streetsSlice = createSlice({
   name: 'streets',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentStreet: (state, action) => {
+      state.currentStreet = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getStreets.pending, (state) => {
@@ -29,7 +33,7 @@ export const streetsSlice = createSlice({
   },
 });
 
-export const {} = streetsSlice.actions;
+export const { setCurrentStreet } = streetsSlice.actions;
 
 export const selectStreets = (state) => state.streets;
 

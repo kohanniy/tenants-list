@@ -4,13 +4,14 @@ import { Box, Container } from '@mui/material';
 import TenantsHeader from '../TenantsHeader/TenantsHeader';
 import TenantsList from '../TenantsList/TenantsList';
 import { sectionStyles } from './Styles';
-import { tenants } from '../../mocks/tenants';
 import Address from '../Address/Address';
 import Loading from '../Loading/Loading';
 import { getStreets, selectStreets } from '../../app/slices/streetsSlice';
+import { selectTenants } from '../../app/slices/tenantsSlice';
 
 function App() {
   const { status: streetsStatus } = useSelector(selectStreets);
+  const { status: tenantsStatus } = useSelector(selectTenants);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,11 +25,11 @@ function App() {
       ) : (
         <>
           <Container sx={sectionStyles} component='section'>
-            {streetsStatus === 'loading' ? <Loading /> : <Address />}
+            <Address />
           </Container>
           <Container sx={sectionStyles} component='section'>
             <TenantsHeader />
-            <TenantsList tenants={tenants} />
+            {tenantsStatus === 'loading' ? <Loading /> : <TenantsList />}
           </Container>
         </>
       )}

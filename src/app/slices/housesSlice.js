@@ -3,34 +3,39 @@ import { getData } from '../../services/api/api';
 import { apiPaths } from '../../services/api/apiPaths';
 
 const initialState = {
-  streets: [],
-  currentStreet: null,
+  houses: [],
+  currentHouse: null,
   status: 'idle',
 };
 
-export const getStreets = createAsyncThunk('counter/getStreets', async () => {
-  const data = await getData(apiPaths.STREETS);
+export const getHouses = createAsyncThunk('houses/getHouses', async (id) => {
+  const data = await getData(`${apiPaths.HOUSES}/${id}`);
   return data;
 });
 
-export const streetsSlice = createSlice({
-  name: 'streets',
+export const housesSlice = createSlice({
+  name: 'houses',
   initialState,
-  reducers: {},
+  reducers: {
+    setCurrentHouse: (state, action) => {
+      state.currentHouse = action.payload;
+    },
+    resetHouses: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(getStreets.pending, (state) => {
+      .addCase(getHouses.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getStreets.fulfilled, (state, action) => {
+      .addCase(getHouses.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.streets = action.payload;
+        state.houses = action.payload;
       });
   },
 });
 
-export const {} = streetsSlice.actions;
+export const { resetHouses, setCurrentHouse } = housesSlice.actions;
 
-export const selectStreets = (state) => state.streets;
+export const selectHouses = (state) => state.houses;
 
-export default streetsSlice.reducer;
+export default housesSlice.reducer;

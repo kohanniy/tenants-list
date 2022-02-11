@@ -1,8 +1,11 @@
 import { Grid } from '@mui/material';
+import { useSelector } from 'react-redux';
+import { selectTenants } from '../../app/slices/tenantsSlice';
 import TenantCard from '../TenantCard/TenantCard';
 import { ListStyled } from './Styles';
 
-function TenantsList({ tenants }) {
+function TenantsList() {
+  const { tenants } = useSelector(selectTenants);
   return (
     <ListStyled container spacing={2} component='ul'>
       {tenants.map((tenant) => (

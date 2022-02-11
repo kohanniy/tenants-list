@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './slices/counterSlice';
-import addressReducer from './slices/addressSlice';
 import streetsReducer from './slices/streetsSlice';
+import housesReducer from './slices/housesSlice';
+import flatsReducer from './slices/flatsSlice';
+import tenantsReducer from './slices/tenantsSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-    address: addressReducer,
     streets: streetsReducer,
+    houses: housesReducer,
+    flats: flatsReducer,
+    tenants: tenantsReducer,
   },
 });
