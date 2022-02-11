@@ -1,10 +1,11 @@
 import { useSelector } from 'react-redux';
-import { Typography, IconButton } from '@mui/material';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import { Typography } from '@mui/material';
 import { WrapperStyled } from './Styles';
+import ProfileFormModal from '../ProfileFormModal/ProfileFormModal';
 import { selectStreets } from '../../app/slices/streetsSlice';
 import { selectHouses } from '../../app/slices/housesSlice';
 import { selectFlats } from '../../app/slices/flatsSlice';
+import { content } from '../../utils/content';
 
 function TenantsHeader({ sx = null }) {
   const { currentStreet } = useSelector(selectStreets);
@@ -21,6 +22,10 @@ function TenantsHeader({ sx = null }) {
     return `${streetName}, ${currentHouse.name}, ${currentFlat.name}`;
   };
 
+  const handleSubmit = (data) => {
+    console.log(data);
+  }
+
   return (
     <WrapperStyled direction='row' spacing={2} sx={sx}>
       {fullAddress() && (
@@ -29,9 +34,7 @@ function TenantsHeader({ sx = null }) {
         </Typography>
       )}
       {currentStreet && currentHouse && currentFlat && (
-        <IconButton sx={{ ml: 'auto' }} color='primary' aria-label='добавить жильца'>
-          <PersonAddIcon />
-        </IconButton>
+        <ProfileFormModal onSubmit={handleSubmit} submitButtonText={content.add} title={content.addTenant} />
       )}
     </WrapperStyled>
   );

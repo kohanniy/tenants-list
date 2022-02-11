@@ -39,7 +39,7 @@ function Address() {
   const selectFieldProps = [
     {
       options: streets ? streets : [],
-      inputLabel: content.streets,
+      inputLabel: content.street,
       id: 'streets',
       onChange: handleStreetsSelectChange,
     },
