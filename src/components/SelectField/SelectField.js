@@ -17,10 +17,10 @@ function SelectField({ inputLabel, options, onChange, ...props }) {
   const isOptionEqualToValue = (option, value) => option.id === value.id;
 
   useEffect(() => {
-    if (options.length === 0) {
+    if (!options && options.length === 0) {
       setValue(null);
     }
-  }, [options.length]);
+  }, [options]);
 
   return (
     <Autocomplete

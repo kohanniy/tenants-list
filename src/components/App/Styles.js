@@ -3,7 +3,6 @@ export const sectionStyles = {
   pb: 3
 };
 
-export const mainStyles = {
-  display: 'flex',
-  flexDirection: 'column'
+export const tenantsHeaderStyles = {
+  mb: 2,
 }

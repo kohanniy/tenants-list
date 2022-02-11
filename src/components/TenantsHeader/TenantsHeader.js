@@ -6,7 +6,7 @@ import { selectStreets } from '../../app/slices/streetsSlice';
 import { selectHouses } from '../../app/slices/housesSlice';
 import { selectFlats } from '../../app/slices/flatsSlice';
 
-function TenantsHeader() {
+function TenantsHeader({ sx = null }) {
   const { currentStreet } = useSelector(selectStreets);
   const { currentHouse } = useSelector(selectHouses);
   const { currentFlat } = useSelector(selectFlats);
@@ -22,7 +22,7 @@ function TenantsHeader() {
   };
 
   return (
-    <WrapperStyled direction='row' spacing={2}>
+    <WrapperStyled direction='row' spacing={2} sx={sx}>
       {fullAddress() && (
         <Typography component='h2' variant='h6'>
           {fullAddress()}

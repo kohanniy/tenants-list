@@ -3,7 +3,7 @@ import { getData } from '../../services/api/api';
 import { apiPaths } from '../../services/api/apiPaths';
 
 const initialState = {
-  tenants: [],
+  tenants: null,
   currentTenant: null,
   status: 'idle',
 };

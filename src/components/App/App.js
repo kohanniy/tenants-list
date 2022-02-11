@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container } from '@mui/material';
 import TenantsHeader from '../TenantsHeader/TenantsHeader';
 import TenantsList from '../TenantsList/TenantsList';
-import { sectionStyles } from './Styles';
+import { sectionStyles, tenantsHeaderStyles } from './Styles';
 import Address from '../Address/Address';
 import Loading from '../Loading/Loading';
 import { getStreets, selectStreets } from '../../app/slices/streetsSlice';
@@ -28,7 +28,7 @@ function App() {
             <Address />
           </Container>
           <Container sx={sectionStyles} component='section'>
-            <TenantsHeader />
+            <TenantsHeader sx={tenantsHeaderStyles} />
             {tenantsStatus === 'loading' ? <Loading /> : <TenantsList />}
           </Container>
         </>
