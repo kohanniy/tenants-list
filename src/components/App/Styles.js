@@ -3,6 +3,7 @@ export const sectionStyles = {
   pb: 3
 };
 
-export const titleStyles = {
-  mb: 2
-};
+export const mainStyles = {
+  display: 'flex',
+  flexDirection: 'column'
+}
