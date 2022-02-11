@@ -25,7 +25,7 @@ function InputGroup(props) {
         inputRef={ref}
         id={name}
         margin='dense'
-        value={value}
+        value={value || ''}
         onChange={onChange}
         inputProps={{
           disabled: isSubmitting,

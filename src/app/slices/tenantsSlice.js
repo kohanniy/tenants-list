@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getData } from '../../services/api/api';
+import { isPendingAction, isFulfilledAction } from '../helpers';
+import { getData, addData } from '../../services/api/api';
 import { apiPaths } from '../../services/api/apiPaths';
 
 const initialState = {
@@ -9,10 +10,18 @@ const initialState = {
 };
 
 export const getTenants = createAsyncThunk('tenants/getTenants', async (id) => {
-  const data = await getData(apiPaths.TENANTS, { params: {
-    addressId: id,
-  }});
+  const data = await getData(apiPaths.TENANTS, {
+    params: {
+      addressId: id,
+    },
+  });
   return data;
+});
+
+export const addTenant = createAsyncThunk('tenants/addTenant', async (values) => {
+  const data = await addData(apiPaths.ADD_TENANT, values);
+  values.id = data.id;
+  return values;
 });
 
 export const tenantsSlice = createSlice({
@@ -23,13 +32,20 @@ export const tenantsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getTenants.pending, (state) => {
-        state.status = 'loading';
-      })
       .addCase(getTenants.fulfilled, (state, action) => {
-        state.status = 'idle';
         state.tenants = action.payload;
-      });
+      })
+      .addCase(addTenant.fulfilled, (state, action) => {
+        state.tenants.push(action.payload);
+      })
+      .addMatcher(
+        isPendingAction,
+        (state) => {state.status = 'loading';}
+      )
+      .addMatcher(
+        isFulfilledAction,
+        (state) => {state.status = 'success';}
+      );
   },
 });
 

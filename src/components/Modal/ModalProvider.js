@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ModalContext } from '../../contexts/ModalContext';
 
-function ModalProvider(props) {
+function ModalProvider({status = 'idle', ...props}) {
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (status === 'success') {
+      setIsOpen(false)
+    }
+  }, [status])
 
   return <ModalContext.Provider value={[isOpen, setIsOpen]} {...props} />;
 }

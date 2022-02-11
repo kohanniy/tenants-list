@@ -18,3 +18,12 @@ export const getData = async (path, config = null) => {
     errorsHandler(err);
   }
 };
+
+export const addData = async (path, values, config) => {
+    try {
+      const { data } = await api.post(path, values, config);
+      return data;
+    } catch (err) {
+      errorsHandler(err);
+    }
+}

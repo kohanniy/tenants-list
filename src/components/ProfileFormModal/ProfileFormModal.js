@@ -11,9 +11,9 @@ import Modal from '../Modal/Modal';
 import { Header } from './Styles';
 import { profileInputData } from '../../utils/constants';
 
-function ProfileFormModal({ title, submitButtonText, onSubmit }) {
+function ProfileFormModal({ title, submitButtonText, status, onSubmit }) {
   return (
-    <ModalProvider>
+    <ModalProvider status={status}>
       <ModalOpenButton>
         <IconButton sx={{ ml: 'auto' }} color='primary' aria-label={title}>
           <PersonAddIcon />
@@ -30,7 +30,7 @@ function ProfileFormModal({ title, submitButtonText, onSubmit }) {
             </IconButton>
           </ModalCloseButton>
         </Header>
-        <Form submitButtonText={submitButtonText} onSubmit={onSubmit}>
+        <Form submitButtonText={submitButtonText} onSubmit={onSubmit} isLoading={status === 'loading'}>
           {profileInputData.map((input) => (
             <InputGroup key={input.name} {...input} />
           ))}

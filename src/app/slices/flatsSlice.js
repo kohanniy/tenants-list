@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { isPendingAction, isFulfilledAction } from '../helpers';
 import { getData } from '../../services/api/api';
 import { apiPaths } from '../../services/api/apiPaths';
 
@@ -24,12 +25,14 @@ export const flatsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getFlats.pending, (state) => {
+      .addCase(getFlats.fulfilled, (state, action) => {
+        state.flats = action.payload;
+      })
+      .addMatcher(isPendingAction, (state) => {
         state.status = 'loading';
       })
-      .addCase(getFlats.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.flats = action.payload;
+      .addMatcher(isFulfilledAction, (state) => {
+        state.status = 'success';
       });
   },
 });
