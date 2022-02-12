@@ -13,4 +13,4 @@
 - Компоненты - Material UI
 - Работа с формами - React Hook Form
 
-[Посмотреть проект](https://list-tenants.netlify.app)
+[Посмотреть проект](https://tenants-list.netlify.app)
