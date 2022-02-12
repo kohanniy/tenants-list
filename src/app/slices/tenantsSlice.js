@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { isPendingAction, isFulfilledAction } from '../helpers';
-import { getData, addData } from '../../services/api/api';
+import { getData, addData, updateData } from '../../services/api/api';
 import { apiPaths } from '../../services/api/apiPaths';
 
 const initialState = {
@@ -8,6 +7,10 @@ const initialState = {
   currentTenant: null,
   status: 'idle',
 };
+
+export const isPendingAction = (action) => action.type.startsWith('tenants') && action.type.endsWith('pending');
+
+export const isFulfilledAction = (action) => action.type.startsWith('tenants') && action.type.endsWith('fulfilled');
 
 export const getTenants = createAsyncThunk('tenants/getTenants', async (id) => {
   const data = await getData(apiPaths.TENANTS, {
@@ -24,6 +27,11 @@ export const addTenant = createAsyncThunk('tenants/addTenant', async (values) =>
   return values;
 });
 
+export const updateTenant = createAsyncThunk('tenants/updateTenant', async (data) => {
+  await updateData(apiPaths.UPDATE_DELETE_TENANT, data.values);
+  return data.updatedData;
+});
+
 export const tenantsSlice = createSlice({
   name: 'tenants',
   initialState,
@@ -38,14 +46,21 @@ export const tenantsSlice = createSlice({
       .addCase(addTenant.fulfilled, (state, action) => {
         state.tenants.push(action.payload);
       })
-      .addMatcher(
-        isPendingAction,
-        (state) => {state.status = 'loading';}
-      )
-      .addMatcher(
-        isFulfilledAction,
-        (state) => {state.status = 'success';}
-      );
+      .addCase(updateTenant.fulfilled, (state, action) => {
+        console.log('payload', action.payload);
+        state.tenants = state.tenants.map((tenant) => {
+          if (tenant.id === action.payload.id) {
+            return tenant = { ...tenant, ...action.payload}
+          }
+          return tenant;
+        })
+      })
+      .addMatcher(isPendingAction, (state) => {
+        state.status = 'loading';
+      })
+      .addMatcher(isFulfilledAction, (state) => {
+        state.status = 'success';
+      });
   },
 });
 

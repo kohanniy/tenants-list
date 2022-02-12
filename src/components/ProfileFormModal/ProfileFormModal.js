@@ -1,5 +1,4 @@
 import { IconButton, Typography } from '@mui/material';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import CloseIcon from '@mui/icons-material/Close';
 import Form from '../Form/Form';
 import { content } from '../../utils/content';
@@ -10,15 +9,15 @@ import ModalCloseButton from '../Modal/ModalCloseButton';
 import Modal from '../Modal/Modal';
 import { Header } from './Styles';
 import { profileInputData } from '../../utils/constants';
+import { useSelector } from 'react-redux';
+import { selectTenants } from '../../app/slices/tenantsSlice';
 
-function ProfileFormModal({ title, submitButtonText, status, onSubmit }) {
+function ProfileFormModal({ title, submitButtonText, onSubmit, openButton, defaultValues, isFormChanged = true }) {
+  const { status: tenantsStatus } = useSelector(selectTenants);
+
   return (
-    <ModalProvider status={status}>
-      <ModalOpenButton>
-        <IconButton sx={{ ml: 'auto' }} color='primary' aria-label={title}>
-          <PersonAddIcon />
-        </IconButton>
-      </ModalOpenButton>
+    <ModalProvider status={tenantsStatus}>
+      <ModalOpenButton>{openButton}</ModalOpenButton>
       <Modal>
         <Header direction='row' spacing={1.5}>
           <Typography component='h3' variant='h6'>
@@ -30,7 +29,13 @@ function ProfileFormModal({ title, submitButtonText, status, onSubmit }) {
             </IconButton>
           </ModalCloseButton>
         </Header>
-        <Form submitButtonText={submitButtonText} onSubmit={onSubmit} isLoading={status === 'loading'}>
+        {!isFormChanged && <Typography sx={{ color: 'error.main'}}>Профиль не изменен</Typography>}
+        <Form
+          submitButtonText={submitButtonText}
+          onSubmit={onSubmit}
+          isLoading={tenantsStatus === 'loading'}
+          defaultValues={defaultValues}
+        >
           {profileInputData.map((input) => (
             <InputGroup key={input.name} {...input} />
           ))}

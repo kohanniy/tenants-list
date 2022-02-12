@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { isPendingAction, isFulfilledAction } from '../helpers';
 import { getData } from '../../services/api/api';
 import { apiPaths } from '../../services/api/apiPaths';
 
@@ -8,6 +7,12 @@ const initialState = {
   currentHouse: null,
   status: 'idle',
 };
+
+export const isPendingAction = (action) =>
+  action.type.startsWith('houses') && action.type.endsWith('pending');
+
+export const isFulfilledAction = (action) =>
+  action.type.startsWith('houses') && action.type.endsWith('fulfilled');
 
 export const getHouses = createAsyncThunk('houses/getHouses', async (id) => {
   const data = await getData(`${apiPaths.HOUSES}/${id}`);

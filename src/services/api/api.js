@@ -26,4 +26,13 @@ export const addData = async (path, values, config) => {
     } catch (err) {
       errorsHandler(err);
     }
-}
+};
+
+export const updateData = async (path, values, config) => {
+    try {
+      const { data } = await api.put(path, values, config);
+      return data;
+    } catch (err) {
+      errorsHandler(err);
+    }
+};

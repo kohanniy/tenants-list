@@ -8,8 +8,6 @@ export const content = {
   house: 'Дом',
   flat: 'Квартира/Офис',
   enterAddress: 'Укажите адресс, и здесь отобразится список жильцов',
-  addTenantProfile: 'Добавить профиль жильца',
-  editTenantProfile: 'Редактировать профиль жильца',
   cancel: 'Отмена',
   add: 'Добавить',
   edit: 'Редактировать',
@@ -20,5 +18,7 @@ export const content = {
   requiredField: 'Поле обязательно для заполнения',
   addTenant: 'Добавить жильца',
   editProfile: 'Редактировать профиль',
-  invalidEmail: 'Введите корректный адрес'
+  deleteTenant: 'Удалить жильца',
+  invalidEmail: 'Введите корректный адрес',
+  areYouSure: 'Вы уверены?'
 }

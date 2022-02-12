@@ -23,9 +23,10 @@ function InputGroup(props) {
       <StyledInput
         autoComplete='true'
         inputRef={ref}
+        name={name}
         id={name}
         margin='dense'
-        value={value || ''}
+        value={value}
         onChange={onChange}
         inputProps={{
           disabled: isSubmitting,

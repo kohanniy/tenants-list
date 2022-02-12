@@ -5,8 +5,8 @@ import { content } from '../../utils/content';
 import ModalCloseButton from '../Modal/ModalCloseButton';
 import { buttonStyles, ButtonsWrapper } from './Styles';
 
-export default function Form({ children, submitButtonText, isLoading, onSubmit, defaultValue = null }) {
-  const { control, handleSubmit } = useForm({ defaultValue });
+export default function Form({ children, submitButtonText, isLoading, onSubmit, defaultValues }) {
+  const { control, handleSubmit } = useForm({ defaultValues });
 
   return (
     <Stack component='form' spacing={1} noValidate onSubmit={handleSubmit(onSubmit)}>

@@ -1,21 +1,27 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
+import { Typography, IconButton } from '@mui/material';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { WrapperStyled } from './Styles';
 import ProfileFormModal from '../ProfileFormModal/ProfileFormModal';
 import { selectStreets } from '../../app/slices/streetsSlice';
 import { selectHouses } from '../../app/slices/housesSlice';
 import { selectFlats } from '../../app/slices/flatsSlice';
 import { content } from '../../utils/content';
-import { addTenant, selectTenants } from '../../app/slices/tenantsSlice';
+import { addTenant } from '../../app/slices/tenantsSlice';
 import { adaptData } from '../../utils/utils';
 
 function TenantsHeader({ sx = null }) {
   const { currentStreet } = useSelector(selectStreets);
   const { currentHouse } = useSelector(selectHouses);
   const { currentFlat } = useSelector(selectFlats);
-  const { status: tenantsStatus } = useSelector(selectTenants);
 
   const dispatch = useDispatch();
+
+  const defaultValues = {
+    name: '',
+    phone: '',
+    email: ''
+  };
 
   const streetName = currentStreet?.nameWithPrefix.split(', ').reverse().join('. ');
 
@@ -32,6 +38,12 @@ function TenantsHeader({ sx = null }) {
     dispatch(addTenant(adaptedData));
   };
 
+  const openButton = (
+    <IconButton sx={{ ml: 'auto' }} color='primary' aria-label={content.addTenant}>
+      <PersonAddIcon />
+    </IconButton>
+  );
+
   return (
     <WrapperStyled direction='row' spacing={2} sx={sx}>
       {fullAddress() && (
@@ -44,7 +56,8 @@ function TenantsHeader({ sx = null }) {
           onSubmit={handleSubmit}
           submitButtonText={content.add}
           title={content.addTenant}
-          status={tenantsStatus}
+          openButton={openButton}
+          defaultValues={defaultValues}
         />
       )}
     </WrapperStyled>
