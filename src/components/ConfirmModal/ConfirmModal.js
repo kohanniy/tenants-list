@@ -7,9 +7,9 @@ import ModalCloseButton from '../Modal/ModalCloseButton';
 import { content } from '../../utils/content';
 import { selectTenants } from '../../app/slices/tenantsSlice';
 
-
 function ConfirmModal({ openButton, onConfirmButtonClick }) {
   const { status: tenantsStatus } = useSelector(selectTenants);
+
   return (
     <ModalProvider status={tenantsStatus}>
       <ModalOpenButton>{openButton}</ModalOpenButton>
@@ -17,7 +17,7 @@ function ConfirmModal({ openButton, onConfirmButtonClick }) {
         <Typography paragraph align='center' variant='h5'>
           {content.areYouSure}
         </Typography>
-        <Stack direction='row' sx={{ textAlign: 'center' }} spacing={3}>
+        <Stack direction='row' justifyContent='center' spacing={3}>
           <ModalCloseButton>
             <Button variant='contained' size='small' onClick={onConfirmButtonClick}>
               {content.delete}

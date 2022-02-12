@@ -6,5 +6,5 @@ export const BoxStyled = styled(Box)({
   alignItems: 'center',
   justifyContent: 'center',
   flexGrow: 1,
-  height: '100%'
+  height: '100%',
 });

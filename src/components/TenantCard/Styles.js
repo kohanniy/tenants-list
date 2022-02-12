@@ -53,5 +53,5 @@ export const tenantNameStyles = {
 };
 
 export const tenantEmailStyles = {
-  lineHeight: 1
-}
+  lineHeight: 1,
+};

@@ -12,7 +12,14 @@ import { profileInputData } from '../../utils/constants';
 import { useSelector } from 'react-redux';
 import { selectTenants } from '../../app/slices/tenantsSlice';
 
-function ProfileFormModal({ title, submitButtonText, onSubmit, openButton, defaultValues, isFormChanged = true }) {
+function ProfileFormModal({
+  title,
+  submitButtonText,
+  onSubmit,
+  openButton,
+  defaultValues,
+  isFormChanged = true,
+}) {
   const { status: tenantsStatus } = useSelector(selectTenants);
 
   return (
@@ -29,7 +36,7 @@ function ProfileFormModal({ title, submitButtonText, onSubmit, openButton, defau
             </IconButton>
           </ModalCloseButton>
         </Header>
-        {!isFormChanged && <Typography sx={{ color: 'error.main'}}>Профиль не изменен</Typography>}
+        {!isFormChanged && <Typography sx={{ color: 'error.main' }}>Профиль не изменен</Typography>}
         <Form
           submitButtonText={submitButtonText}
           onSubmit={onSubmit}

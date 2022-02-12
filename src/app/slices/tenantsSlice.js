@@ -1,16 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getData, addData, updateData } from '../../services/api/api';
+import { getData, addData, updateData, deleteData } from '../../services/api/api';
 import { apiPaths } from '../../services/api/apiPaths';
 
 const initialState = {
   tenants: null,
-  currentTenant: null,
   status: 'idle',
 };
 
-export const isPendingAction = (action) => action.type.startsWith('tenants') && action.type.endsWith('pending');
+export const isPendingAction = (action) =>
+  action.type.startsWith('tenants') && action.type.endsWith('pending');
 
-export const isFulfilledAction = (action) => action.type.startsWith('tenants') && action.type.endsWith('fulfilled');
+export const isFulfilledAction = (action) =>
+  action.type.startsWith('tenants') && action.type.endsWith('fulfilled');
 
 export const getTenants = createAsyncThunk('tenants/getTenants', async (id) => {
   const data = await getData(apiPaths.TENANTS, {
@@ -32,6 +33,11 @@ export const updateTenant = createAsyncThunk('tenants/updateTenant', async (data
   return data.updatedData;
 });
 
+export const deleteTenant = createAsyncThunk('tenants/deleteTenant', async (tenant) => {
+  await deleteData(`${apiPaths.UPDATE_DELETE_TENANT}/${tenant.id}`);
+  return tenant;
+});
+
 export const tenantsSlice = createSlice({
   name: 'tenants',
   initialState,
@@ -47,13 +53,15 @@ export const tenantsSlice = createSlice({
         state.tenants.push(action.payload);
       })
       .addCase(updateTenant.fulfilled, (state, action) => {
-        console.log('payload', action.payload);
         state.tenants = state.tenants.map((tenant) => {
           if (tenant.id === action.payload.id) {
-            return tenant = { ...tenant, ...action.payload}
+            return (tenant = { ...tenant, ...action.payload });
           }
           return tenant;
-        })
+        });
+      })
+      .addCase(deleteTenant.fulfilled, (state, action) => {
+        state.tenants = state.tenants.filter((tenant) => tenant.id !== action.payload.id);
       })
       .addMatcher(isPendingAction, (state) => {
         state.status = 'loading';

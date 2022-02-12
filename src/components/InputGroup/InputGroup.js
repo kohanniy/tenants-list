@@ -30,7 +30,7 @@ function InputGroup(props) {
         onChange={onChange}
         inputProps={{
           disabled: isSubmitting,
-          ...inputProps
+          ...inputProps,
         }}
         {...otherProps}
       />
@@ -40,5 +40,3 @@ function InputGroup(props) {
 }
 
 export default InputGroup;
-
-//inputProps ={ disabled: isSubmitting }

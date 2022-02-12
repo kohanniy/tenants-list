@@ -28,8 +28,8 @@ function App() {
             <Address />
           </Container>
           <Container sx={sectionStyles} component='section'>
-              <TenantsHeader sx={tenantsHeaderStyles} />
-              {tenantsStatus === 'loading' ? <Loading /> : <TenantsList />}
+            <TenantsHeader sx={tenantsHeaderStyles} />
+            {tenantsStatus === 'loading' ? <Loading /> : <TenantsList />}
           </Container>
         </>
       )}

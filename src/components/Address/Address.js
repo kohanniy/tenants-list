@@ -66,11 +66,7 @@ function Address() {
       </Typography>
       <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
         {selectFieldProps.map((field) => (
-          <SelectField
-            key={field.id}
-            getOptionLabel={getOptionLabel}
-            {...field}
-          />
+          <SelectField key={field.id} getOptionLabel={getOptionLabel} {...field} />
         ))}
       </Stack>
     </>

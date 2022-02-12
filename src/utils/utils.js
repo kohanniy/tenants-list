@@ -6,9 +6,9 @@ export const callAll =
 export const adaptData = (data) => {
   Object.keys(data).forEach((key) => {
     if (!data[key]) {
-      data[key] = ''
+      data[key] = '';
     }
   });
 
   return data;
-}
+};

@@ -25,7 +25,7 @@ export const streetsSlice = createSlice({
   reducers: {
     setCurrentStreet: (state, action) => {
       state.currentStreet = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder

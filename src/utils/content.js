@@ -20,5 +20,5 @@ export const content = {
   editProfile: 'Редактировать профиль',
   deleteTenant: 'Удалить жильца',
   invalidEmail: 'Введите корректный адрес',
-  areYouSure: 'Вы уверены?'
-}
+  areYouSure: 'Вы уверены?',
+};

@@ -20,7 +20,7 @@ function TenantsHeader({ sx = null }) {
   const defaultValues = {
     name: '',
     phone: '',
-    email: ''
+    email: '',
   };
 
   const streetName = currentStreet?.nameWithPrefix.split(', ').reverse().join('. ');

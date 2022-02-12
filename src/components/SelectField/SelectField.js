@@ -13,7 +13,8 @@ function SelectField({ inputLabel, options, onChange, ...props }) {
     onChange(newValue);
   };
 
-  const getOptionDisabled = (option) => (option.cityId && option.cityId !== 1) || (value && option.id === value.id);
+  const getOptionDisabled = (option) =>
+    (option.cityId && option.cityId !== 1) || (value && option.id === value.id);
   const isOptionEqualToValue = (option, value) => option.id === value.id;
 
   useEffect(() => {

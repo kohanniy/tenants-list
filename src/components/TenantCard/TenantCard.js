@@ -18,7 +18,7 @@ import {
 import { content } from '../../utils/content';
 import ProfileFormModal from '../ProfileFormModal/ProfileFormModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTenant } from '../../app/slices/tenantsSlice';
+import { deleteTenant, updateTenant } from '../../app/slices/tenantsSlice';
 import { selectFlats } from '../../app/slices/flatsSlice';
 import ConfirmModal from '../ConfirmModal/ConfirmModal';
 
@@ -50,7 +50,7 @@ function TenantCard({ tenant }) {
   };
 
   const handleConfirmButtonClick = () => {
-    console.log('delete');
+    dispatch(deleteTenant(tenant));
   };
 
   const openButtonForEditProfile = (

@@ -22,11 +22,11 @@ export const StyledInput = styled(InputBase)(({ theme }) => ({
   },
 
   '&.Mui-error .MuiInputBase-input': {
-    borderColor: theme.palette.error.main
-  }
+    borderColor: theme.palette.error.main,
+  },
 }));
 
 export const helperTextStyles = {
   minHeight: '20px',
   lineHeight: 1,
-}
+};
